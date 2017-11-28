@@ -1,9 +1,27 @@
-#Script to calculate the Pearson's coefficient of skewness for a set of hit distribution data
-#Usage: python2.7 Skewness-Calculator.py ContigLengths_Taxid-File Hit-Distribution-File Skewness.Output
+#!/usr/bin/env python
+
+"""
+Script to calculate the Pearson's coefficient 
+of skewness for a set of hit distribution data
+"""
+
+__author__ = "Paul Donovan" 
+__maintainer__ = "Paul Donovan"
+__email__ = "pauldonovandonegal@gmail.com"
 
 import sys
 from math import sqrt
 import os
+
+#Display help and usage
+parser = argparse.ArgumentParser(description="Incorrect number of command line arguments")
+parser.add_argument('Results.tsv')
+parser.add_argument('BLAST-Hit-Distribution.tsv')
+parser.add_argument('Output.tsv')
+if len(sys.argv[1:]) == 0:
+    parser.print_help()
+    parser.exit()
+args = parser.parse_args()
 
 Output = open(sys.argv[3], "w")
 
@@ -31,11 +49,12 @@ else:
 				ContigLenDict[(k)] = (NewVal)
 	ReadsPerContigList = list()
 	for k,v in ContigLenDict.iteritems():
-		if len(v.split("\t")) == 1:  #If there is no value for v, make it 0. This indicates that no reads mapped to that contig.
-			v = str(v) + "\t0"
-		(Contig, Reads) = v.strip().split("\t")
-		ReadsPerContig = (float(Reads))/(float(Contig))
-		ReadsPerContigList.append(ReadsPerContig)
+		if len(v.split("\t")) == 1:  #If there are no reads mapping to this contig, skip it
+			pass
+		else:
+			(Contig, Reads) = v.strip().split("\t")
+			ReadsPerContig = (float(Reads))/(float(Contig))
+			ReadsPerContigList.append(ReadsPerContig)
 	ReadsPerContigList = sorted(ReadsPerContigList, key=float)
 	ListLen = len(ReadsPerContigList)
 	if ListLen % 2 == 1:
