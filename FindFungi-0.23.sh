@@ -165,7 +165,7 @@ wait
 cat $Dir/Processing/ReadNames*.fsa > $Dir/Processing/All-Reads-From-BLAST_$z.fsa
 
 ### Print reads with predictions to file (for manual inspection)
-/home/paul/local/bin/python2.7 /home/paul/scripts/ReadNames-to-FASTA_V7.py $Dir/Results/Final_Results_$z.tsv $Dir/Processing/All-Reads-From-BLAST_$z.fsa  >> /home/paul/Project-work/Metagenomics-Datasets/EBI-Metagenomics/FungalRead-Results/$z_v0.23_FungalReads.tsv & 
+/home/paul/local/bin/python2.7 /home/paul/scripts/ReadNames-to-FASTA_V7.py $Dir/Results/Final_Results_$z.tsv $Dir/Processing/All-Reads-From-BLAST_$z.fsa  >> /home/paul/Project-work/Metagenomics-Datasets/EBI-Metagenomics/FungalRead-Results/${z}_v0.23_FungalReads.tsv & 
 
 ### Create text summary of pipeline
 ClassifiedReads=$(wc -l $Dir/Processing/AllClassified_$z | awk '{print $1}')
