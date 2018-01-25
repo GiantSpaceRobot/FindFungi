@@ -44,6 +44,13 @@ your environment, or add these tools and scripts to you $PATH.
 * NOTE: It may be necessary for you to include the absolute paths for all of the scripts
 and tools within the FindFungi-0.23.sh master script, depending on the cluster node
 preferences (e.g. executing 'python' actually calls the node's version of python, not yours).
+* Download the Kraken and BLAST databases from this website (http://bioinformatics.czc.hokudai.ac.jp/findfungi/).
+* Uncompress these files and put them somewhere sensible:
+
+```
+tar -xvfz Kraken_*.tar.gz
+mv Kraken_* Kraken_DB_Directory/
+```
 
 ### Testing the pipeline
 
