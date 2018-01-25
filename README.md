@@ -41,6 +41,9 @@ re)
 (/your/directory/scripts).
 * Change the absolute paths of skewer, kraken, blast, the shell and python scripts to reflect
 your environment, or add these tools and scripts to you $PATH.
+* NOTE: It may be necessary for you to include the absolute paths for all of the scripts
+and tools within the FindFungi-0.23.sh master script, depending on the cluster node
+preferences (e.g. executing 'python' actually calls the node's version of python, not yours).
 
 ### Testing the pipeline
 
