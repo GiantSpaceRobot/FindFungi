@@ -71,6 +71,7 @@ should be informative.
 The .csv results should show the following:
 
 ```
+Taxon name,Taxid,Reads mapping to taxid,Reads mapping to children taxids,Pearson skewness score,Percent of pseudo-chromosomes with read hits
 Candida sp. LDI48194,1759314,671,0,0.17486834948,100.0
 Malassezia restricta,76775,378,0,0.16534366649,100.0
 Candida tropicalis MYA-3404,294747,265,0,-0.0886001807602,100.0
