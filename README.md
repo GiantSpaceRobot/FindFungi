@@ -37,7 +37,7 @@ re)
 
 * Download all of the scripts from GitHub/GiantSpaceRobot and move to a directory 
 (/your/directory/scripts).
-* Change the absolute paths of kraken, blast, the shell and python scripts to reflect
+* Change the absolute paths of skewer, kraken, blast, the shell and python scripts to reflect
 your environment, or add these tools and scripts to you $PATH.
 
 ### Testing the pipeline
