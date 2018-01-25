@@ -2,7 +2,7 @@
 # Usage: FindFungi_GoButton_v0.23.sh
 # Author: Paul Donovan 
 # Email: pauldonovandonegal@gmail.com
-# 28-Nov-2017
+# 25-Jan-2018
 
 source /home/paul/.bash_profile
 
@@ -80,14 +80,14 @@ for d in $Dir/Processing/SplitFiles_Kraken/*; do #Gather all reads with a top hi
 	bsub -K -q C /home/paul/local/bin/python2.7 /home/paul/scripts/KrakenReduction.py $d $Dir/Results/BLAST_Processing/All-Unique-Reads.txt $Dir/Processing/SplitFiles_Kraken/Reduced_${File} &
 done
 wait
-for d in $Dir/Processing/SplitFiles_Kraken/*; do  #Sort individual Kraken output files
+for d in $Dir/Processing/SplitFiles_Kraken/*; do #Sort individual Kraken output files
 	File=$(basename $d)
 	bsub -K -q C /home/paul/local/bin/./sort_parallel --parallel 16 -o $Dir/Processing/SplitFiles_Kraken/sorted_$File -k2,2 $d & 
 done
 wait
 bsub -K -q C /home/paul/local/bin/./sort_parallel --parallel 16 -o $Dir/Processing/sorted.$z.All-Kraken-Results.tsv -m -k2,2 $Dir/Processing/SplitFiles_Kraken/*sorted* & #Merge and sort all Kraken output files
 wait
-bsub -K -q C /home/paul/local/bin/python2.7 /home/paul/scripts/Kraken32-to-Consensus.py $Dir/Processing/sorted.$z.All-Kraken-Results.tsv $Dir/Processing/Consensus.sorted.$z.All-Kraken-Results.tsv &  #Consensus of 32 predictions for each read
+bsub -K -q C /home/paul/local/bin/python2.7 /home/paul/scripts/KrakenConsensus_V4.py $Dir/Processing/sorted.$z.All-Kraken-Results.tsv $Dir/Processing/Consensus.sorted.$z.All-Kraken-Results.tsv &
 wait
 
 ### Count number of predictions for each taxonomic unit and sort
@@ -128,7 +128,7 @@ for d in $Dir/Processing/ReadNames_bsub.*.fsa; do
 	File=$(basename $d)
 	Taxid=$(echo $File | awk -F '.' '{print $2}')
 	tail -n +31 $d | head -n -6 > $Dir/Processing/ReadNames.$Taxid.fsa
-	bsub -K -q C /home/gabriel/blast/ncbi-blast-2.2.30+/bin/blastn -task megablast -query $Dir/Processing/ReadNames.$Taxid.fsa -db /home/paul/Project-work/Databases/BLAST-Databases/FungalGenomeDatabases/Taxid-$Taxid -out $Dir/Results/BLAST_Processing/BLAST.$Taxid -evalue 1E-20 -num_threads 30 -outfmt 6 &
+	bsub -K -q C /home/gabriel/blast/ncbi-blast-2.2.30+/bin/blastn -task megablast -query $Dir/Processing/ReadNames.$Taxid.fsa -db /home/paul/Project-work/Databases/BLAST-Databases/FungalGenomeDatabases_EqualContigs/Taxid-$Taxid -out $Dir/Results/BLAST_Processing/BLAST.$Taxid -evalue 1E-20 -num_threads 30 -outfmt 6 &
 done
 wait
 
@@ -139,18 +139,18 @@ for d in $Dir/Results/BLAST_Processing/BLAST*; do
 	Taxid="${File#BLAST.}"
 	awk '! a[$1]++' $d > $Dir/Results/BLAST_Processing/Top-Hits.$File
 	awk '{print $2}' $Dir/Results/BLAST_Processing/Top-Hits.$File | sort | uniq -c > $Dir/Results/BLAST_Processing/Hit-Distribution.$File
-	bsub -K -q C /home/paul/local/bin/python2.7 /home/paul/scripts/Skewness-Calculator.py /home/paul/Project-work/Databases/Fungal-Genomes/NCBI-Fungi/RepresentativeSpecies_ContigLengths/ContigLengths_Taxid-$Taxid $Dir/Results/BLAST_Processing/Hit-Distribution.$File $Dir/Results/BLAST_Processing/Skewness.$File &
+	bsub -K -q C /home/paul/local/bin/python2.7 /home/paul/scripts/Skewness-Calculator_V3.py /home/paul/Project-work/Databases/Fungal-Genomes/NCBI-Fungi/RepresentativeSpecies_EqualContigLengths_ContigLengths/ContigLengths_Taxid-$Taxid $Dir/Results/BLAST_Processing/Hit-Distribution.$File $Dir/Results/BLAST_Processing/Skewness.$File &
 done
 wait
-cat $Dir/Results/BLAST_Processing/Skewness* > $Dir/Results/BLAST_Processing/All-Skewness-Scores & #Gather all skewness scores
+cat $Dir/Results/BLAST_Processing/Skewness* > $Dir/Results/BLAST_Processing/All-Skewness-Scores &
 
 ### Combine Kraken results with Skewness scores
-bsub -K -q C /home/paul/local/bin/python2.7 /home/paul/scripts/Consensus-CrossRef-Skewness.py $Dir/Processing/Consensus.sorted.$z.All-Kraken-Results.tsv $Dir/Results/BLAST_Processing/All-Skewness-Scores $Dir/Results/Final_Results_$z.tsv & 
+bsub -K -q C /home/paul/local/bin/python2.7 /home/paul/scripts/Consensus-CrossRef-Skewness_V2.py $Dir/Processing/Consensus.sorted.$z.All-Kraken-Results.tsv $Dir/Results/BLAST_Processing/All-Skewness-Scores $Dir/Results/Final_Results_$z.tsv & 
 wait
 
 ### Gather all taxonomical predictions and reformat to parsable format
-/home/paul/scripts/LowestCommonAncestor_V3.sh $Dir/Results/Final_Results_$z.tsv &
-/home/paul/scripts/LowestCommonAncestor_V3.sh $Dir/Results/Final_Results_$z.tsv_AllResults.tsv &
+/home/paul/scripts/LowestCommonAncestor_V4.sh $Dir/Results/Final_Results_$z.tsv &
+/home/paul/scripts/LowestCommonAncestor_V4.sh $Dir/Results/Final_Results_$z.tsv_AllResults.tsv &
 wait
 awk 'NR == 1; NR > 1 {print $0 | "sort -t',' -k3,3rn -k4,4rn"}' $Dir/Results/Final_Results_$z-lca.csv > $Dir/Results/Final_Results_$z-lca.sorted.csv  & #Normal sort, but it keeps the header at the top
 awk 'NR == 1; NR > 1 {print $0 | "sort -t',' -k3,3rn -k4,4rn"}' $Dir/Results/Final_Results_${z}.tsv_AllResults-lca.csv > $Dir/Results/Final_Results_${z}_AllResults-lca.sorted.csv  & #Normal sort, but it keeps the header at the top
@@ -164,8 +164,9 @@ wait
 ### Gather all reads classified by BLAST
 cat $Dir/Processing/ReadNames*.fsa > $Dir/Processing/All-Reads-From-BLAST_$z.fsa
 
-### Print reads with predictions to file (for manual inspection)
-/home/paul/local/bin/python2.7 /home/paul/scripts/ReadNames-to-FASTA_V7.py $Dir/Results/Final_Results_$z.tsv $Dir/Processing/All-Reads-From-BLAST_$z.fsa  >> /home/paul/Project-work/Metagenomics-Datasets/EBI-Metagenomics/FungalRead-Results/${z}_v0.23_FungalReads.tsv & 
+### Print reads with predictions to file
+bsub -K -q C /home/paul/local/bin/python2.7 /home/paul/scripts/ReadNames-to-FASTA_V8.py $Dir/Results/Final_Results_$z.tsv_AllResults.tsv $Dir/Processing/All-Reads-From-BLAST_$z.fsa /home/paul/Project-work/Metagenomics-Datasets/EBI-Metagenomics/FungalRead-Results/${z}_v0.23_FungalReads.tsv_AllResults.fsa & 
+bsub -K -q C /home/paul/local/bin/python2.7 /home/paul/scripts/ReadNames-to-FASTA_V8.py $Dir/Results/Final_Results_$z.tsv $Dir/Processing/All-Reads-From-BLAST_$z.fsa /home/paul/Project-work/Metagenomics-Datasets/EBI-Metagenomics/FungalRead-Results/${z}_v0.23_FungalReads.fsa &
 
 ### Create text summary of pipeline
 ClassifiedReads=$(wc -l $Dir/Processing/AllClassified_$z | awk '{print $1}')
@@ -216,3 +217,4 @@ rm -f /home/paul/Project-work/Metagenomics-Datasets/EBI-Metagenomics/Metadata.$z
 fi
 
 echo "Finished at $(date)"
+
