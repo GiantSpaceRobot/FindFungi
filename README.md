@@ -26,12 +26,14 @@ on your own compute-cluster for development or your own analyses.
 FindFungi v0.23 was built using the following:
 
 * gcc version 4.4.4 20100726 (Red Hat 4.4.4-13)
+* coreutils 8.27
 * python 2.7.13 (modules: sys, os, NCBITaxa, Bio, math, argparse, itertools, collections, 
 re)
 * skewer 0.2.2
 * kraken 0.10.5-beta
 * ncbi blast 2.2.30
-* Rscript 3.2.2
+* Rscript 3.3.3 (packages: wordcloud)
+* graphviz 2.40.1
 
 ### Installing
 
