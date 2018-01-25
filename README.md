@@ -82,6 +82,11 @@ Malassezia restricta,76775,378,0,0.16534366649,100.0
 Candida tropicalis MYA-3404,294747,265,0,-0.0886001807602,100.0
 ```
 
+## Contributors
+
+Paul Donovan (pauldonovandonega@gmail.com)
+Dr Gabriel Gonzalez
+
 ## License
 
 This project is licensed under the MIT License.
