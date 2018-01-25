@@ -7,9 +7,13 @@ combined to generate a consensus prediction. All reads are then BLASTed against 
 predicted genomes to generate read distribution skewness scores to select for the 
 most likely true positives.
 
+FindFungi-0.23 was built on an IBM platform load-sharing facility with 32 worker nodes.
+Similar architecture is required to set up the pipeline due to the memory requirements of 
+the Kraken databases.
+
 ## Quickstart
 
-Download the pipeline, associated scripts, prerequisites and other tools. 
+Download the pipeline, databases, associated scripts, prerequisites and other tools. 
 Run the pipeline:
 
 ```
