@@ -96,7 +96,7 @@ Candida tropicalis MYA-3404,294747,265,0,-0.0886001807602,100.0
 ## Contributors
 
 * Paul Donovan (pauldonovandonegal@gmail.com)
-* Dr Gabriel Gonzalez
+* Gabriel Gonzalez, PhD (e-mail: gagonzalez@czc.hokudai.ac.jp)
 
 ## License
 
