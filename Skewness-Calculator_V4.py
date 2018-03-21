@@ -12,6 +12,7 @@ __email__ = "pauldonovandonegal@gmail.com"
 import sys
 from math import sqrt
 import os
+import argparse
 
 #Display help and usage
 parser = argparse.ArgumentParser(description="Incorrect number of command line arguments")
