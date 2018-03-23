@@ -31,7 +31,7 @@ ContigsWithHits = 0
 ContigHitDict = dict()
 
 #Add hit distribution data to the dictionary
-if os.stat(sys.argv[2]).st_size == 0:
+if os.stat(sys.argv[1]).st_size == 0:
 	print "The file %s is empty. Cannot calculate Pearson Coefficient of Skewness" % sys.argv[2]
 	Taxid = (str(sys.argv[1]).strip().split("-"))[-1]
 	Output.write(Taxid + "\tN/A\t(no BLAST hits)\n")
