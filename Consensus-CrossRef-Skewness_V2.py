@@ -29,7 +29,7 @@ OutputAll = open(str(sys.argv[3]) + "_AllResults.tsv", "w")
 SkewDict = dict()
 
 for line in Skewness:
-	k,v = line[0], (str(line[1]) + "___" + str(line[2]))
+	k,v = (line[0].strip().split("."))[2], (str(line[1]) + "___" + str(line[2]))
 	SkewDict[(k)] = (v)
 
 for prediction in Consensus:
