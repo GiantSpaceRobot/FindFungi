@@ -95,7 +95,7 @@ done
 wait
 bsub -K -q C sort_parallel --parallel 16 -o $Dir/Processing/sorted.$z.All-Kraken-Results.tsv -m -k2,2 $Dir/Processing/SplitFiles_Kraken/*sorted* & #Merge and sort all Kraken output files
 wait
-bsub -K -q C python2.7 $ScriptPath/KrakenConsensus_V4.py $Dir/Processing/sorted.$z.All-Kraken-Results.tsv $Dir/Processing/Consensus.sorted.$z.All-Kraken-Results.tsv &
+bsub -K -q C python2.7 $ScriptPath/Kraken32-to-Consensus.py $Dir/Processing/sorted.$z.All-Kraken-Results.tsv $Dir/Processing/Consensus.sorted.$z.All-Kraken-Results.tsv &
 wait
 
 ### Count number of predictions for each taxonomic unit and sort
