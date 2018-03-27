@@ -11,6 +11,7 @@ __email__ = "pauldonovandonegal@gmail.com"
 
 import sys
 from ete3 import NCBITaxa
+import argparse
 
 #Display help and usage
 parser = argparse.ArgumentParser(description="Incorrect number of command line arguments")
