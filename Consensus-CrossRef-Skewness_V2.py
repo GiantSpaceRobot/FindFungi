@@ -10,6 +10,7 @@ __maintainer__ = "Paul Donovan"
 __email__ = "pauldonovandonegal@gmail.com"
 
 import sys
+import argparse
 
 #Display help and usage
 parser = argparse.ArgumentParser(description="Incorrect number of command line arguments")
