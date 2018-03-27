@@ -11,11 +11,13 @@ __email__ = "pauldonovandonegal@gmail.com"
 
 from Bio import SeqIO
 import sys
+import argparse
 
 #Display help and usage
 parser = argparse.ArgumentParser(description="Incorrect number of command line arguments")
 parser.add_argument('ReadNames.txt')
-parser.add_argument('FASTA-file.fsa')
+parser.add_argument('FASTA-input.fsa')
+parser.add_argument('FASTA-output.fsa')
 if len(sys.argv[1:]) == 0:
     parser.print_help()
     parser.exit()
