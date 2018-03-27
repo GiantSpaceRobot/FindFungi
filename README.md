@@ -23,7 +23,9 @@ Run the pipeline:
 ## Getting Started
 
 These instructions will hopefully allow you to get a copy of FindFungi up and running 
-on your own compute-cluster for development or your own analyses.
+on your own compute-cluster/server for development or your own analyses. If using a 
+non-IBM LSF compute cluster, change the 'bsub' commands to reflect your architecture.
+If using a single server, remove the 'bsub' commands.
 
 ### Prerequisites
 
