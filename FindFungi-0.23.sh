@@ -23,7 +23,7 @@ ScriptPath=/home/user/scripts  #Location of downloaded python and shell scripts
 PreDir=/home/user/Some_Directory/$z  #Location you want FindFungi to build the analysis
 KrakenDir=/home/user/Location_of_Kraken_Databases  #Location of the 32 downloaded Kraken databases
 FungTaxDir=/home/user/Location_of_Fungal-Taxids.txt  #Location of the Fungal taxids and PipelineSummary files from GitHub
-BLAST-DB-Dir=/home/user/Location_of_BLAST_Databases  #Location of the 949 downloaded BLAST databases
+BLAST_DB_Dir=/home/user/Location_of_BLAST_Databases  #Location of the 949 downloaded BLAST databases
 #####
 
 
@@ -136,7 +136,7 @@ for d in $Dir/Processing/ReadNames_bsub.*.fsa; do
 	File=$(basename $d)
 	Taxid=$(echo $File | awk -F '.' '{print $2}')
 	tail -n +31 $d | head -n -6 > $Dir/Processing/ReadNames.$Taxid.fsa
-	bsub -K -q C blastn -task megablast -query $Dir/Processing/ReadNames.$Taxid.fsa -db $BLAST-DB-Dir/Taxid-$Taxid -out $Dir/Results/BLAST_Processing/BLAST.$Taxid -evalue 1E-20 -num_threads 30 -outfmt 6 &
+	bsub -K -q C blastn -task megablast -query $Dir/Processing/ReadNames.$Taxid.fsa -db $BLAST_DB_Dir/Taxid-$Taxid -out $Dir/Results/BLAST_Processing/BLAST.$Taxid -evalue 1E-20 -num_threads 30 -outfmt 6 &
 done
 wait
 
