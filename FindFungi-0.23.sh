@@ -12,7 +12,6 @@ if [ $# -eq 0 ]; then
 	echo "No arguments provided"
 	exit 1
 fi
-rm *.std* #Remove all bsub reports from this directory
 
 ###Declare paths for FindFungi analysis, scripts, tools etc.
 x=$1
@@ -66,7 +65,6 @@ for i in $(seq 1 32); do
 	bsub -K -q C kraken --db $KrakenDir/Chunks_$i --threads 30 --fasta-input $PreDir/FASTA/$z.final.fna --output $Dir/Processing/SplitFiles_Kraken/$z.$i &
 done	
 wait
-touch $Dir/LaunchNext.txt
 for d in $Dir/Processing/SplitFiles_Kraken/*; do
     File=$(basename $d)
     grep ^C $d > $Dir/Processing/$File.Classified.tsv
