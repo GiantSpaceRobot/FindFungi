@@ -198,7 +198,6 @@ FungalReadPercentage=$(python -c "print(float($FungalRead*100))")  #Get the perc
 FungalReadPercentage2=$(printf "%0.2f\n" $FungalReadPercentage) #Shorten float to two decimal places
 cp $Dir/Results/Final_Results_$z-lca.sorted.csv $Dir/${FungalReadPercentage2}_${z}.Results.csv
 cp $Dir/Results/Final_Results_${z}_AllResults-lca.sorted.csv $Dir/${FungalReadPercentage2}_${z}.Results.IncludingFalsePositives.csv
-echo -e "Read name\tPredicted Taxonomy" >> $Dir/${FungalReadPercentage2}_${z}.FungalReads.tsv                 # Create file with predicted
 
 ### PDF creation
 echo "Not enough fungal reads to create wordcloud" >> $Dir/Results/WordcloudError.txt
