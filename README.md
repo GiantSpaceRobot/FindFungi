@@ -1,5 +1,7 @@
 # Outdated
 Please visit the FindFungi-v0.23.1 repository for the most up-to-date version of FindFungi.
+This version of the FindFungi pipeline utilised an incorrect version of the Pearson's second 
+coefficient of skewness equation. This error did not however impact the pipeline's findings.
 
 # FindFungi
 
