@@ -1,4 +1,4 @@
-# FindFungi
+# FindFungi-v0.23.1
 
 A pipeline for the identification of fungi in public metagenomics datasets.
 The FindFungi pipeline uses the metagenomics read-classifier Kraken with 32 custom fungal 
