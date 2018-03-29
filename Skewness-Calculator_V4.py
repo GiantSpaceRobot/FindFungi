@@ -64,7 +64,7 @@ else:
 		Median = sum(sorted(ReadsPerContigList)[ListLen//2-1:ListLen//2+1])/2.0
 	Mean = float(sum(ReadsPerContigList)) / max(len(ReadsPerContigList), 1)
 	StandardDev = sqrt(float(reduce(lambda x, y: x + y, map(lambda x: (float(x) - Mean) ** 2, ReadsPerContigList))) / len(ReadsPerContigList))
-	PearsonSkewness = 3*(Mean-Median)/StandardDev
+	PearsonSkewness = (Mean-Median)/StandardDev
 	Taxid = (str(sys.argv[1]).strip().split("-"))[-1]
 	PercentChroms = (float(ContigsWithHits)/float(NumberOfContigs)*100)
 	Output.write(Taxid + "\t" + str(PearsonSkewness) + "\t" + str(PercentChroms) + "\n")
