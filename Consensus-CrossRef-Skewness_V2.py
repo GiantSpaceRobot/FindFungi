@@ -46,7 +46,7 @@ for prediction in Consensus:
 			continue
 		if (type(HitDist) == float):
 			if int(HitDist) > 70: #If more than 70% of pseudo-chromosomes have a hit:
-				if -0.6 < float(PearsonSkewness) < 0.6: #If the Skewness is between -0.6 and 0.6
+				if -0.2 < float(PearsonSkewness) < 0.2: #If the Skewness is between -0.2 and 0.2
 					Output.write("\t".join(prediction) + "\t" + str(PearsonSkewness) + "\t" + str(HitDist) + "\n")
 
 OutputAll.close()
