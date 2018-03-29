@@ -44,7 +44,7 @@ re)
 ### Installing
 
 * Download all of the scripts from GitHub/GiantSpaceRobot and move to a directory 
-(/your/directory/scripts).
+(/your/directory/scripts). You may need to give these scripts more permissions (e.g. chmod 755 *).
 * Change the absolute paths of skewer, kraken, blast, the shell and python scripts to reflect
 your environment, or add these tools and scripts to you $PATH.
 * NOTE: It may be necessary for you to include the absolute paths for all of the scripts
@@ -89,15 +89,15 @@ should be informative.
 The .csv results should show the following:
 
 ```
-Taxon name,Taxid,Reads mapping to taxid,Reads mapping to children taxids,Pearson skewness score,Percent of pseudo-chromosomes with read hits
-Candida sp. LDI48194,1759314,671,0,0.17486834948,100.0
-Malassezia restricta,76775,378,0,0.16534366649,100.0
-Candida tropicalis MYA-3404,294747,265,0,-0.0886001807602,100.0
+#Taxon name,Taxid,Reads mapping to taxid,Reads mapping to children taxids,Pearson skewness score,Percent of pseudo-chromosomes with read hits
+Candida sp. LDI48194,1759314,671,0,0.524623062587,100.0
+Malassezia restricta,76775,378,0,0.496034792692,100.0
+Candida tropicalis MYA-3404,294747,265,0,-0.265788716977,100.0
 ```
 
 ## Contributors
 
-* Paul Donovan, PhD (pauldonovandonegal@gmail.com)
+* Paul Donovan, PhD (email: pauldonovandonegal@gmail.com)
 * Gabriel Gonzalez, PhD (e-mail: gagonzalez@czc.hokudai.ac.jp)
 
 ## License
