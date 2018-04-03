@@ -7,6 +7,9 @@ combined to generate a consensus prediction. All reads are then BLASTed against 
 predicted genomes to generate read distribution skewness scores to select for the 
 most likely true positives.
 
+FindFungi v0.23.1 corrects an error in v0.23, which did not correctly calculate Pearson’s 
+skewness scores. Skewness scores calculated by v0.23.1 are 3-times higher than with v0.23.
+
 FindFungi-0.23 was built on an IBM platform load-sharing facility with 32 worker nodes.
 Similar architecture is required to set up the pipeline due to the memory requirements of 
 the Kraken databases.
