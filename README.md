@@ -1,4 +1,4 @@
-# FindFungi-v0.23.1
+# FindFungi-v0.23.2
 
 A pipeline for the identification of fungi in public metagenomics datasets.
 The FindFungi pipeline uses the metagenomics read-classifier Kraken with 32 custom fungal 
@@ -6,6 +6,9 @@ databases to generate 32 taxon predictions for a single read. These 32 predictio
 combined to generate a consensus prediction. All reads are then BLASTed against their
 predicted genomes to generate read distribution skewness scores to select for the 
 most likely true positives.
+
+FindFungi v0.23.2 corrects an error where the KrakenReduction.py script requested a file 
+that was generated in FindFungi v0.22. This step has been removed.
 
 FindFungi v0.23.1 corrects an error in v0.23, which did not correctly calculate Pearson’s 
 skewness scores. A multiplication factor of 3 was omitted in v0.23 
