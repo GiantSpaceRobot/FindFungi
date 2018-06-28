@@ -1,5 +1,7 @@
 # FindFungi
 
+PLEASE USE FindFungi-v0.23.2.
+
 A pipeline for the identification of fungi in public metagenomics datasets.
 The FindFungi pipeline uses the metagenomics read-classifier Kraken with 32 custom fungal 
 databases to generate 32 taxon predictions for a single read. These 32 predictions are 
