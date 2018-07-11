@@ -1,0 +1,6 @@
+========
+FindFungi
+========
+
+FindFungi Version 0.23.3 (11/7/2018) Paul Donovan <pauldonovandonegal@gmail.com>
+A tool for the identification of fungi in metagenomics datasets
