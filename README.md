@@ -1,4 +1,4 @@
-# FindFungi-v0.23.2
+# FindFungi-v0.23.3
 
 A pipeline for the identification of fungi in public metagenomics datasets.
 The FindFungi pipeline uses the metagenomics read-classifier Kraken with 32 custom fungal 
@@ -6,6 +6,9 @@ databases to generate 32 taxon predictions for a single read. These 32 predictio
 combined to generate a consensus prediction. All reads are then BLASTed against their
 predicted genomes to generate read distribution skewness scores to select for the 
 most likely true positives.
+
+FindFungi-v0.23.3 corrects an error in the LowestCommonAncestor_V4.sh script where the 
+Python path and script path were incorrect.
 
 FindFungi v0.23.2 corrects an error where the KrakenReduction.py script requested a file 
 that was generated in FindFungi v0.22. This step has been removed.
@@ -27,7 +30,7 @@ Download the pipeline, databases, associated scripts, prerequisites and other to
 Run the pipeline:
 
 ```
-./FindFungi-0.23.sh /path/to/FASTQ-file.fastq Dataset-name
+./FindFungi-0.23.3.sh /path/to/FASTQ-file.fastq Dataset-name
 ```
 
 ## Getting Started
@@ -55,8 +58,9 @@ re)
 
 * Download all of the scripts from GitHub/GiantSpaceRobot and move to a directory 
 (/your/directory/scripts). You may need to give these scripts more permissions (e.g. chmod 755 *).
-* Change the absolute paths of skewer, kraken, blast, the shell and python scripts to reflect
-your environment, or add these tools and scripts to you $PATH.
+* In the FindFungi-v0.23.3 script, change the absolute paths of skewer, kraken, blast, the shell 
+and python scripts to reflect your environment, or add these tools and scripts to you $PATH. 
+You will also need to edit the LowestCommonAncestor.sh script to include the path to the downloaded scripts.
 * NOTE: It may be necessary for you to include the absolute paths for all of the scripts
 and tools within the FindFungi-0.23.sh master script, depending on the cluster node
 preferences (e.g. executing 'python' actually calls the node's version of python, not yours).
