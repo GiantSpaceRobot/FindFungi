@@ -46,27 +46,21 @@ for line in ResultsTuple:
 	else:
 		TaxidPearsonDict[ResultTaxid] = Pearson
 for k,v in AllTaxidDict.iteritems():
-	ChildrenCount = 0
-	descendants = ncbi.get_descendant_taxa(str(k), collapse_subspecies=False, intermediate_nodes=True)
+        ChildrenCount = 0
+        try:
+                descendants = ncbi.get_lineage(str(k))
+        except ValueError:
+                pass
 	taxid = list([k])
 	name = ncbi.get_taxid_translator(taxid)
-	if len(descendants) == 1: #This is a leaf node
-		PearsonSkewness = TaxidPearsonDict.get(k)
-		Skewness = (PearsonSkewness.strip().split("___"))[0]
-		HitDist = (PearsonSkewness.strip().split("___"))[1]
-		Output.write(str(name.itervalues().next()) + "," + str(k) + "," + str(v) + ",0," + str(Skewness) + "," + str(HitDist) + "\n")
-	else:
-		for i in descendants: 
-			if str(i) in AllTaxidDict:
-				ChildrenCount = ChildrenCount + int(AllTaxidDict[str(i)])
-				#print "Match: %s is a descendant of %s and it is in our dictionary" % (i,k)
-			if str(i) == str(k):
-				print "Error with taxid %s descendants list: This taxid is in it's own list" % k
-		PearsonSkewness = TaxidPearsonDict.get(k)
-		Skewness = (PearsonSkewness.strip().split("___"))[0]
-		HitDist= (PearsonSkewness.strip().split("___"))[1]
-		if PearsonSkewness == "":
-			Output.write(str(name.itervalues().next()) + "," + str(k) + "," + str(v) + "," + str(ChildrenCount) + ",N/A (Pearson score only calculated for leaf nodes\n")
-		else:
-			Output.write(str(name.itervalues().next()) + "," + str(k) + "," + str(v) + "," + str(ChildrenCount) + "," + str(Skewness) + "," + str(HitDist) + "\n")
+        for i in descendants: 
+                if str(i) in AllTaxidDict:
+                        ChildrenCount = ChildrenCount + int(AllTaxidDict[str(i)])
+        PearsonSkewness = TaxidPearsonDict.get(k)
+        Skewness = (PearsonSkewness.strip().split("___"))[0]
+        HitDist= (PearsonSkewness.strip().split("___"))[1]
+        if PearsonSkewness == "":
+                Output.write(str(name.itervalues().next()) + "," + str(k) + "," + str(v) + "," + str(ChildrenCount) + ",N/A (Pearson score only calculated for leaf nodes\n")
+        else:
+                Output.write(str(name.itervalues().next()) + "," + str(k) + "," + str(v) + "," + str(ChildrenCount) + "," + str(Skewness) + "," + str(HitDist) + "\n")
 Output.close()
