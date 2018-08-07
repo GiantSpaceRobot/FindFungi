@@ -11,5 +11,5 @@ ScriptPath=/home/user/scripts  #Location of downloaded python and shell scripts
 x=$1
 y=${x%.*} 
 awk '{print $3}' $1 | sort | uniq  > $y-taxids.txt
-python2.7 ScriptPath/LowestCommonAncestor_V4.py $1 $y-taxids.txt $y-lca.csv
+python2.7 $ScriptPath/LowestCommonAncestor_V4.py $1 $y-taxids.txt $y-lca.csv
 echo "Done"
