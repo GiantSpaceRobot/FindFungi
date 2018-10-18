@@ -62,7 +62,7 @@ if [ ! -d $PreDir ]; then
 
 ### Release the Kraken 
 for i in $(seq 1 32); do
-	bsub -K -q C kraken --db $KrakenDir/Chunks_$i --threads 30 --fasta-input $PreDir/FASTA/$z.final.fna --output $Dir/Processing/SplitFiles_Kraken/$z.$i &
+	bsub -K -q C kraken --db $KrakenDir/Kraken_$i --threads 30 --fasta-input $PreDir/FASTA/$z.final.fna --output $Dir/Processing/SplitFiles_Kraken/$z.$i &
 done	
 wait
 for d in $Dir/Processing/SplitFiles_Kraken/*; do
