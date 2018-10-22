@@ -47,7 +47,7 @@ FindFungi v0.23 was built using the following:
 
 * gcc version 4.4.4 20100726 (Red Hat 4.4.4-13)
 * coreutils 8.27
-* python 2.7.13 (modules: sys, os, NCBITaxa, Bio, math, argparse, itertools, collections, 
+* python 2.7.13 (modules: sys, os, ete3, Bio, math, argparse, itertools, collections, 
 re)
 * skewer 0.2.2
 * kraken 0.10.5-beta
