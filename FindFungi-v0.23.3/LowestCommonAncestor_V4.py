@@ -46,21 +46,21 @@ for line in ResultsTuple:
 	else:
 		TaxidPearsonDict[ResultTaxid] = Pearson
 for k,v in AllTaxidDict.iteritems():
-        ChildrenCount = 0
-        try:
-                descendants = ncbi.get_lineage(str(k))
-        except ValueError:
-                pass
+    ChildrenCount = 0
+    try:
+        descendants = ncbi.get_lineage(str(k))
+    except ValueError:
+        pass
 	taxid = list([k])
 	name = ncbi.get_taxid_translator(taxid)
-        for i in descendants: 
-                if str(i) in AllTaxidDict:
-                        ChildrenCount = ChildrenCount + int(AllTaxidDict[str(i)])
-        PearsonSkewness = TaxidPearsonDict.get(k)
-        Skewness = (PearsonSkewness.strip().split("___"))[0]
-        HitDist= (PearsonSkewness.strip().split("___"))[1]
-        if PearsonSkewness == "":
-                Output.write(str(name.itervalues().next()) + "," + str(k) + "," + str(v) + "," + str(ChildrenCount) + ",N/A (Pearson score only calculated for leaf nodes\n")
-        else:
-                Output.write(str(name.itervalues().next()) + "," + str(k) + "," + str(v) + "," + str(ChildrenCount) + "," + str(Skewness) + "," + str(HitDist) + "\n")
+    for i in descendants: 
+        if str(i) in AllTaxidDict:
+            ChildrenCount = ChildrenCount + int(AllTaxidDict[str(i)])
+    PearsonSkewness = TaxidPearsonDict.get(k)
+    Skewness = (PearsonSkewness.strip().split("___"))[0]
+    HitDist= (PearsonSkewness.strip().split("___"))[1]
+    if PearsonSkewness == "":
+        Output.write(str(name.itervalues().next()) + "," + str(k) + "," + str(v) + "," + str(ChildrenCount) + ",N/A (Pearson score only calculated for leaf nodes\n")
+    else:
+        Output.write(str(name.itervalues().next()) + "," + str(k) + "," + str(v) + "," + str(ChildrenCount) + "," + str(Skewness) + "," + str(HitDist) + "\n")
 Output.close()
