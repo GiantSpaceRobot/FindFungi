@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 """
-This script accepts Kraken/Kaiju output and a file listing 
+This script accepts Kraken/Kaiju output and a file listing
 all taxids, and gives a .csv file with taxid statistics
 """
 
-__author__ = "Paul Donovan" 
+__author__ = "Paul Donovan"
 __maintainer__ = "Paul Donovan"
 __email__ = "pauldonovandonegal@gmail.com"
 
@@ -35,25 +35,25 @@ ResultTaxids = list()
 TaxidPearsonDict = dict()
 
 for line in ResultsTuple:
-	ResultTaxid = line[2]
-	Pearson = line[5] + "___" + line[6]
-	ResultTaxids.append(ResultTaxid)
-	if ResultTaxid in AllTaxidDict:
-		OldValue = int(AllTaxidDict[ResultTaxid])
-		AllTaxidDict[ResultTaxid] = OldValue + 1
-	if ResultTaxid in TaxidPearsonDict:
-		pass
-	else:
-		TaxidPearsonDict[ResultTaxid] = Pearson
+    ResultTaxid = line[2]
+    Pearson = line[5] + "___" + line[6]
+    ResultTaxids.append(ResultTaxid)
+    if ResultTaxid in AllTaxidDict:
+        OldValue = int(AllTaxidDict[ResultTaxid])
+        AllTaxidDict[ResultTaxid] = OldValue + 1
+    if ResultTaxid in TaxidPearsonDict:
+        pass
+    else:
+        TaxidPearsonDict[ResultTaxid] = Pearson
 for k,v in AllTaxidDict.iteritems():
     ChildrenCount = 0
     try:
         descendants = ncbi.get_lineage(str(k))
     except ValueError:
         pass
-	taxid = list([k])
-	name = ncbi.get_taxid_translator(taxid)
-    for i in descendants: 
+    taxid = list([k])
+    name = ncbi.get_taxid_translator(taxid)
+    for i in descendants:
         if str(i) in AllTaxidDict:
             ChildrenCount = ChildrenCount + int(AllTaxidDict[str(i)])
     PearsonSkewness = TaxidPearsonDict.get(k)
