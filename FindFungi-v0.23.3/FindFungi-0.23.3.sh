@@ -84,10 +84,13 @@ SplitInt=$(printf "%.0f" $SplitNum)
 
 for d in $Dir/Processing/SplitFiles_Kraken/*; do #Sort individual Kraken output files
 	File=$(basename $d)
-	bsub -K -q C sort_parallel --parallel 16 -o $Dir/Processing/SplitFiles_Kraken/sorted_$File -k2,2 $d & 
+	#bsub -K -q C sort_parallel --parallel 16 -o $Dir/Processing/SplitFiles_Kraken/sorted_$File -k2,2 $d & 
+	sort -k2,2 $d > $Dir/Processing/SplitFiles_Kraken/sorted_$File &
+
 done
 wait
-bsub -K -q C sort_parallel --parallel 16 -o $Dir/Processing/sorted.$z.All-Kraken-Results.tsv -m -k2,2 $Dir/Processing/SplitFiles_Kraken/*sorted* & #Merge and sort all Kraken output files
+#bsub -K -q C sort_parallel --parallel 16 -o $Dir/Processing/sorted.$z.All-Kraken-Results.tsv -m -k2,2 $Dir/Processing/SplitFiles_Kraken/*sorted* & #Merge and sort all Kraken output files
+cat $Dir/Processing/SplitFiles_Kraken/*sorted* | sort -k2,2 > $Dir/Processing/sorted.$z.All-Kraken-Results.tsv &
 wait
 bsub -K -q C python2.7 $ScriptPath/Kraken32-to-Consensus.py $Dir/Processing/sorted.$z.All-Kraken-Results.tsv $Dir/Processing/Consensus.sorted.$z.All-Kraken-Results.tsv &
 wait
