@@ -110,6 +110,9 @@ Malassezia restricta,76775,378,0,0.496034792692,100.0
 Candida tropicalis MYA-3404,294747,265,0,-0.265788716977,100.0
 ```
 
+## SLURM Implementation
+Dr Ali Snedden has kindly created a SLURM implementation of the pipeline: https://github.com/astrophys/FindFungi_adapted_for_slurm.
+
 ## Contributors
 
 * Paul Donovan, PhD (email: pauldonovandonegal@gmail.com)
