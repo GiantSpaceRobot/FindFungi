@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Usage: LowestCommonAncestor_V4.sh Results-File.tsv
 # Author: Paul Donovan 
 # Email: pauldonovandonegal@gmail.com
