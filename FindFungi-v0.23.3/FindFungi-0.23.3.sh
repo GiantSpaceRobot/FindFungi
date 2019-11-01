@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Usage: ./FindFungi-0.23.sh /path/to/FASTA-file.fastq File-name
 # Author: Paul Donovan 
 # Email: pauldonovandonegal@gmail.com
