@@ -114,7 +114,7 @@ Candida tropicalis MYA-3404,294747,265,0,-0.265788716977,100.0
 Dr Ali Snedden has kindly created a SLURM implementation of the pipeline: https://github.com/astrophys/FindFungi_adapted_for_slurm.
 
 ## Standard Unix Implementation (not a compute cluster)
-Please use this version if you intend to use FindFungi on a single Unix machine: XXX
+Please use this version if you intend to use FindFungi on a single Unix machine: https://github.com/GiantSpaceRobot/FindFungi_SingleServerVersion
 
 ## Contributors
 
